@@ -225,7 +225,7 @@ export function WorkflowDiagram() {
                 left: step.x,
                 top: step.y,
                 width: BLOCK_WIDTH,
-                height: BLOCK_HEIGHT,
+                minHeight: BLOCK_HEIGHT,
                 borderColor: step.color,
                 color: step.color,
               }}
