@@ -173,7 +173,6 @@
 }
 
 .workflow__fileIcon {
-  color: $color-text-muted;
   margin-right: $spacing-sm;
 }
 
@@ -306,6 +305,28 @@
     outline: 2px solid $color-link;
     outline-offset: -1px;
   }
+}
+
+.workflow__colorRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.workflow__colorInput {
+  width: 40px;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  cursor: pointer;
+  background: none;
+}
+
+.workflow__colorValue {
+  font-size: 13px;
+  color: $color-text-muted;
+  font-family: monospace;
 }
 
 .workflow__checkboxList {

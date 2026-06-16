@@ -52,8 +52,8 @@
 	{
 		"initialIndex": 13,
 		"name": "Доставка на сортировочный пункт",
-		"x": 222,
-		"y": 795,
+		"x": 430,
+		"y": 549,
 		"nextSteps": [
 			14
 		],
@@ -80,49 +80,130 @@
 	{
 		"initialIndex": 16,
 		"name": "Шаг 17",
-		"x": 83,
-		"y": 130,
+		"x": 116,
+		"y": 265,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
 	},
 	{
 		"initialIndex": 17,
 		"name": "Шаг 18",
-		"x": 48,
-		"y": 56,
+		"x": 265,
+		"y": 137,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
 	},
 	{
 		"initialIndex": 18,
 		"name": "Шаг 14",
-		"x": 0,
-		"y": 0,
+		"x": 101,
+		"y": 173,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
 	},
 	{
 		"initialIndex": 19,
 		"name": "Шаг 15",
-		"x": 0,
+		"x": 186,
 		"y": 0,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
 	},
 	{
 		"initialIndex": 20,
 		"name": "Шаг 16",
-		"x": 0,
-		"y": 0,
+		"x": -9,
+		"y": 66,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
 	},
 	{
 		"initialIndex": 21,
 		"name": "Шаг 19",
+		"x": 151,
+		"y": 51,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 22,
+		"name": "Шаг 20",
+		"x": 443,
+		"y": 90,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 23,
+		"name": "Шаг 21",
+		"x": 303,
+		"y": 53,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 24,
+		"name": "Шаг 22",
+		"x": 19,
+		"y": 115,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 25,
+		"name": "Шаг 23",
 		"x": 0,
 		"y": 0,
 		"nextSteps": [],
-		"color": "#ffffff"
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 26,
+		"name": "Шаг 24",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 27,
+		"name": "Шаг 25",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 28,
+		"name": "Шаг 26",
+		"x": 132,
+		"y": 340,
+		"nextSteps": [
+			8,
+			9
+		],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 29,
+		"name": "123",
+		"x": 102,
+		"y": 434,
+		"nextSteps": [
+			8,
+			9,
+			10,
+			11,
+			13
+		],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 30,
+		"name": "ololo",
+		"x": 263,
+		"y": 222,
+		"nextSteps": [],
+		"color": "#ff0000"
 	}
 ]

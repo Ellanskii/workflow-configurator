@@ -20,6 +20,7 @@ let lastCreatedId: number | null = null;
 
 const showCreateModal = ref(false);
 const createName = ref('');
+const createColor = ref('#333333');
 const createTransitions = ref<number[]>([]);
 const createError = ref('');
 const createNameInputRef = ref<HTMLInputElement | null>(null);
@@ -51,6 +52,10 @@ const steps = computed(() => store.sortedSteps);
 
 function stepName(id: number): string {
   return store.stepById(id)?.name ?? `#${id}`;
+}
+
+function stepColor(id: number): string {
+  return store.stepById(id)?.color ?? '#333333';
 }
 
 function onRowClick(step: Step) {
@@ -106,6 +111,7 @@ function cancelEdit() {
 
 async function onCreateClick() {
   createName.value = store.generateDefaultName();
+  createColor.value = '#333333';
   createTransitions.value = [];
   createError.value = '';
   showCreateModal.value = true;
@@ -128,7 +134,7 @@ async function submitCreate() {
     createError.value = 'Такое название уже используется';
     return;
   }
-  const step = await store.createStep(name, createTransitions.value);
+  const step = await store.createStep(name, createTransitions.value, createColor.value);
   if (step) {
     showCreateModal.value = false;
     lastCreatedId = step.id;
@@ -226,7 +232,7 @@ function onSearchInput(e: Event) {
             @click="onRowClick(step)"
           >
             <td :class="styles.workflow__td" @dblclick="startEdit(step)">
-              <i class="fa-regular fa-file" :class="styles.workflow__fileIcon"></i>
+              <i class="fa-regular fa-file" :class="styles.workflow__fileIcon" :style="{ color: step.color }"></i>
               <template v-if="editingId === step.id">
                 <input
                   ref="editInputRef"
@@ -247,7 +253,12 @@ function onSearchInput(e: Event) {
             <td :class="styles.workflow__td">{{ step.y }}</td>
             <td :class="styles.workflow__td">
               <span v-if="step.transitions.length === 0" :class="styles.workflow__noTransitions">—</span>
-              <span v-else>{{ step.transitions.map(stepName).join(', ') }}</span>
+              <template v-else>
+                <template v-for="(tid, idx) in step.transitions" :key="tid">
+                  <span v-if="idx > 0">, </span>
+                  <i class="fa-regular fa-file" :class="styles.workflow__fileIcon" :style="{ color: stepColor(tid) }"></i>{{ stepName(tid) }}
+                </template>
+              </template>
             </td>
             <td :class="[styles.workflow__td, styles['workflow__td--actions']]">
               <button
@@ -296,6 +307,14 @@ function onSearchInput(e: Event) {
             @keydown.escape="closeCreateModal"
           />
           <div v-if="createError" :class="styles.workflow__editError">{{ createError }}</div>
+        </div>
+
+        <div :class="styles.workflow__formGroup">
+          <label :class="styles.workflow__formLabel">Цвет</label>
+          <div :class="styles.workflow__colorRow">
+            <input type="color" v-model="createColor" :class="styles.workflow__colorInput" />
+            <span :class="styles.workflow__colorValue">{{ createColor }}</span>
+          </div>
         </div>
 
         <div v-if="store.steps.length > 0" :class="styles.workflow__formGroup">

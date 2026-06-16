@@ -142,6 +142,31 @@ export function WorkflowDiagram() {
     y: step.y + BLOCK_HEIGHT / 2,
   });
 
+  // Returns the point where the line from `from` to box center `to` hits the box edge.
+  const edgePoint = (from: { x: number; y: number }, to: { x: number; y: number }) => {
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    if (len === 0) return to;
+    const nx = dx / len;
+    const ny = dy / len;
+    const hw = BLOCK_WIDTH / 2;
+    const hh = BLOCK_HEIGHT / 2;
+    const tx = nx !== 0 ? hw / Math.abs(nx) : Infinity;
+    const ty = ny !== 0 ? hh / Math.abs(ny) : Infinity;
+    const t = Math.min(tx, ty);
+    return { x: to.x - t * nx, y: to.y - t * ny };
+  };
+
+  // Builds SVG polygon points for an arrowhead at `tip` pointing from `from`.
+  const arrowPoints = (from: { x: number; y: number }, tip: { x: number; y: number }, size = 10) => {
+    const angle = Math.atan2(tip.y - from.y, tip.x - from.x);
+    const p1 = `${tip.x},${tip.y}`;
+    const p2 = `${tip.x - size * Math.cos(angle - Math.PI / 6)},${tip.y - size * Math.sin(angle - Math.PI / 6)}`;
+    const p3 = `${tip.x - size * Math.cos(angle + Math.PI / 6)},${tip.y - size * Math.sin(angle + Math.PI / 6)}`;
+    return `${p1} ${p2} ${p3}`;
+  };
+
   return (
     <div className={styles.diagram}>
       <div className={styles.diagram__toolbar}>
@@ -179,35 +204,25 @@ export function WorkflowDiagram() {
             width={canvasWidth}
             height={canvasHeight}
           >
-            <defs>
-              <marker
-                id="arrow"
-                markerWidth="10"
-                markerHeight="7"
-                refX="9"
-                refY="3.5"
-                orient="auto"
-              >
-                <polygon points="0 0, 10 3.5, 0 7" fill="#8a8a92" />
-              </marker>
-            </defs>
             {steps.map((step) =>
               step.transitions.map((targetId) => {
                 const target = steps.find((s) => s.id === targetId);
                 if (!target) return null;
                 const from = centerOf(step);
                 const to = centerOf(target);
+                const tip = edgePoint(from, to);
                 return (
-                  <line
-                    key={`${step.id}-${targetId}`}
-                    x1={from.x}
-                    y1={from.y}
-                    x2={to.x}
-                    y2={to.y}
-                    stroke="#8a8a92"
-                    strokeWidth={1.5}
-                    markerEnd="url(#arrow)"
-                  />
+                  <g key={`${step.id}-${targetId}`}>
+                    <line
+                      x1={from.x}
+                      y1={from.y}
+                      x2={tip.x}
+                      y2={tip.y}
+                      stroke="#8a8a92"
+                      strokeWidth={1.5}
+                    />
+                    <polygon points={arrowPoints(from, tip)} fill="#8a8a92" />
+                  </g>
                 );
               }),
             )}
