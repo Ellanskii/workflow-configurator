@@ -115,7 +115,7 @@ export const useWorkflowStore = defineStore('workflow', {
       this.error = null;
       try {
         const name = this.generateDefaultName();
-        const step = await api.createStep(name, 0, 0, '#ffffff');
+        const step = await api.createStep(name, 0, 0, '#333333');
         this.steps.push(step);
         return step;
       } catch {
