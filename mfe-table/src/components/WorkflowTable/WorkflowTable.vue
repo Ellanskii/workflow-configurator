@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 
+import Modal from '../Modal/Modal.vue';
 import { onStepMoved, onStepSelected } from '../../events';
 import { useWorkflowStore } from '../../stores/workflow';
 import type { SortColumn, Step } from '../../types';
@@ -278,73 +279,73 @@ function onSearchInput(e: Event) {
       </table>
     </div>
 
-    <div v-if="pendingDeleteId !== null" :class="styles.workflow__overlay">
-      <div :class="styles.workflow__dialog">
-        <p>Удалить шаг «{{ deleteStepName }}»?</p>
-        <div :class="styles.workflow__dialogActions">
-          <button type="button" :class="styles.workflow__dialogCancel" @click="cancelDelete">
-            Отмена
-          </button>
-          <button type="button" :class="styles.workflow__dialogConfirm" @click="confirmDelete">
-            Удалить
-          </button>
+    <Modal :open="pendingDeleteId !== null" @close="cancelDelete">
+      <p>Удалить шаг «{{ deleteStepName }}»?</p>
+      <div :class="styles.workflow__dialogActions">
+        <button type="button" :class="styles.workflow__dialogCancel" @click="cancelDelete">
+          Отмена
+        </button>
+        <button type="button" :class="styles.workflow__dialogConfirm" @click="confirmDelete">
+          Удалить
+        </button>
+      </div>
+    </Modal>
+
+    <Modal
+      :open="showCreateModal"
+      :dialog-style="{ minWidth: '380px', maxWidth: '480px', width: '100%' }"
+      @close="closeCreateModal"
+    >
+      <h2 :class="styles.workflow__dialogTitle">Новое состояние</h2>
+
+      <div :class="styles.workflow__formGroup">
+        <label :class="styles.workflow__formLabel">Название</label>
+        <input
+          ref="createNameInputRef"
+          v-model="createName"
+          :class="styles.workflow__formInput"
+          placeholder="Введите название"
+          @keydown.enter="submitCreate"
+          @keydown.escape="closeCreateModal"
+        />
+        <div v-if="createError" :class="styles.workflow__editError">{{ createError }}</div>
+      </div>
+
+      <div :class="styles.workflow__formGroup">
+        <label :class="styles.workflow__formLabel">Цвет</label>
+        <div :class="styles.workflow__colorRow">
+          <input type="color" v-model="createColor" :class="styles.workflow__colorInput" />
+          <span :class="styles.workflow__colorValue">{{ createColor }}</span>
         </div>
       </div>
-    </div>
 
-    <div v-if="showCreateModal" :class="styles.workflow__overlay" @click.self="closeCreateModal">
-      <div :class="[styles.workflow__dialog, styles['workflow__dialog--create']]">
-        <h2 :class="styles.workflow__dialogTitle">Новое состояние</h2>
-
-        <div :class="styles.workflow__formGroup">
-          <label :class="styles.workflow__formLabel">Название</label>
-          <input
-            ref="createNameInputRef"
-            v-model="createName"
-            :class="styles.workflow__formInput"
-            placeholder="Введите название"
-            @keydown.enter="submitCreate"
-            @keydown.escape="closeCreateModal"
-          />
-          <div v-if="createError" :class="styles.workflow__editError">{{ createError }}</div>
-        </div>
-
-        <div :class="styles.workflow__formGroup">
-          <label :class="styles.workflow__formLabel">Цвет</label>
-          <div :class="styles.workflow__colorRow">
-            <input type="color" v-model="createColor" :class="styles.workflow__colorInput" />
-            <span :class="styles.workflow__colorValue">{{ createColor }}</span>
-          </div>
-        </div>
-
-        <div v-if="store.steps.length > 0" :class="styles.workflow__formGroup">
-          <label :class="styles.workflow__formLabel">Следующие шаги</label>
-          <div :class="styles.workflow__checkboxList">
-            <label
-              v-for="step in store.steps"
-              :key="step.id"
-              :class="styles.workflow__checkboxItem"
-            >
-              <input type="checkbox" :value="step.id" v-model="createTransitions" />
-              {{ step.name }}
-            </label>
-          </div>
-        </div>
-
-        <div :class="styles.workflow__dialogActions">
-          <button type="button" :class="styles.workflow__dialogCancel" @click="closeCreateModal">
-            Отмена
-          </button>
-          <button
-            type="button"
-            :class="[styles.workflow__dialogConfirm, styles['workflow__dialogConfirm--primary']]"
-            :disabled="store.isMutating"
-            @click="submitCreate"
+      <div v-if="store.steps.length > 0" :class="styles.workflow__formGroup">
+        <label :class="styles.workflow__formLabel">Следующие шаги</label>
+        <div :class="styles.workflow__checkboxList">
+          <label
+            v-for="step in store.steps"
+            :key="step.id"
+            :class="styles.workflow__checkboxItem"
           >
-            Создать
-          </button>
+            <input type="checkbox" :value="step.id" v-model="createTransitions" />
+            {{ step.name }}
+          </label>
         </div>
       </div>
-    </div>
+
+      <div :class="styles.workflow__dialogActions">
+        <button type="button" :class="styles.workflow__dialogCancel" @click="closeCreateModal">
+          Отмена
+        </button>
+        <button
+          type="button"
+          :class="[styles.workflow__dialogConfirm, styles['workflow__dialogConfirm--primary']]"
+          :disabled="store.isMutating"
+          @click="submitCreate"
+        >
+          Создать
+        </button>
+      </div>
+    </Modal>
   </div>
 </template>

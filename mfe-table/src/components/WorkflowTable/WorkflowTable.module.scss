@@ -219,24 +219,6 @@
   color: $color-text-muted;
 }
 
-.workflow__overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.workflow__dialog {
-  background: $color-surface;
-  border-radius: $border-radius;
-  padding: $spacing-lg;
-  min-width: 280px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
 .workflow__dialogActions {
   display: flex;
   justify-content: flex-end;
@@ -264,12 +246,6 @@
 .workflow__dialogConfirm--primary {
   background: $color-link;
   border-color: $color-link;
-}
-
-.workflow__dialog--create {
-  min-width: 380px;
-  max-width: 480px;
-  width: 100%;
 }
 
 .workflow__dialogTitle {

@@ -80,8 +80,8 @@
 	{
 		"initialIndex": 16,
 		"name": "Шаг 17",
-		"x": 116,
-		"y": 265,
+		"x": 115,
+		"y": 261,
 		"nextSteps": [],
 		"color": "#333333"
 	},
@@ -205,5 +205,28 @@
 		"y": 222,
 		"nextSteps": [],
 		"color": "#ff0000"
+	},
+	{
+		"initialIndex": 31,
+		"name": "Шаг 27",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [
+			8,
+			9,
+			10
+		],
+		"color": "#333333"
+	},
+	{
+		"initialIndex": 32,
+		"name": "Шаг 28",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [
+			11,
+			12
+		],
+		"color": "#2cce5c"
 	}
 ]
