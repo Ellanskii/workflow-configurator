@@ -90,6 +90,7 @@
 
 .workflow__tableWrap {
   flex: 1;
+  min-height: 0;
   overflow: auto;
   background: $color-surface;
   border: 1px solid $color-border;
