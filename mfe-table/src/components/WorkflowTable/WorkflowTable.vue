@@ -61,7 +61,7 @@ function stepColor(id: number): string {
 
 function onRowClick(step: Step) {
   if (editingId.value === step.id) return;
-  store.selectStep(store.selectedStepId === step.id ? null : step.id);
+  store.selectStep(step.id);
 }
 
 function onSortClick(column: SortColumn) {
@@ -112,7 +112,7 @@ function cancelEdit() {
 
 async function onCreateClick() {
   createName.value = store.generateDefaultName();
-  createColor.value = '#333333';
+  createColor.value = '#ffffff';
   createTransitions.value = [];
   createError.value = '';
   showCreateModal.value = true;
@@ -202,7 +202,7 @@ function onSearchInput(e: Event) {
       {{ store.error }}
     </div>
 
-    <div :class="styles.workflow__tableWrap">
+    <div :class="styles.workflow__tableWrap" @click="store.selectStep(null)">
       <table :class="styles.workflow__table">
         <thead :class="styles.workflow__thead">
           <tr>
@@ -230,7 +230,7 @@ function onSearchInput(e: Event) {
               store.selectedStepId === step.id && styles['workflow__row--selected'],
             ]"
             data-testid="workflow-row"
-            @click="onRowClick(step)"
+            @click.stop="onRowClick(step)"
           >
             <td :class="styles.workflow__td" @dblclick="startEdit(step)">
               <i class="fa-regular fa-file" :class="styles.workflow__fileIcon" :style="{ color: step.color }"></i>

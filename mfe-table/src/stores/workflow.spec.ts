@@ -36,7 +36,7 @@ describe('workflow store', () => {
 
     const step = await store.createStep('Шаг 2', [0]);
 
-    expect(api.createStep).toHaveBeenCalledWith('Шаг 2', 0, 0, '#333333', [0]);
+    expect(api.createStep).toHaveBeenCalledWith('Шаг 2', 0, 0, '#ffffff', [0]);
     expect(step?.name).toBe('Шаг 2');
     expect(store.steps).toHaveLength(2);
   });

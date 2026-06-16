@@ -50,13 +50,18 @@ export function WorkflowDiagram() {
   }, [dispatch]);
 
   const handleBlockClick = useCallback(
-    (id: number) => {
-      const next = selectedStepId === id ? null : id;
-      dispatch(stepSelected(next));
-      emitStepSelected(next);
+    (e: React.MouseEvent, id: number) => {
+      e.stopPropagation();
+      dispatch(stepSelected(id));
+      emitStepSelected(id);
     },
-    [dispatch, selectedStepId],
+    [dispatch],
   );
+
+  const handleCanvasClick = useCallback(() => {
+    dispatch(stepSelected(null));
+    emitStepSelected(null);
+  }, [dispatch]);
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent, step: Step) => {
@@ -192,6 +197,7 @@ export function WorkflowDiagram() {
       <div ref={containerRef} className={styles.diagram__viewport} onWheel={handleWheel}>
         <div
           className={styles.diagram__canvas}
+          onClick={handleCanvasClick}
           style={{
             width: canvasWidth,
             height: canvasHeight,
@@ -245,10 +251,10 @@ export function WorkflowDiagram() {
                 width: BLOCK_WIDTH,
                 minHeight: BLOCK_HEIGHT,
                 borderColor: step.color,
-                color: step.color,
+                color: step.color === '#ffffff' ? '#2c2c30' : step.color,
               }}
               onMouseDown={(e) => handleMouseDown(e, step)}
-              onClick={() => handleBlockClick(step.id)}
+              onClick={(e) => handleBlockClick(e, step.id)}
             >
               {step.name}
             </div>

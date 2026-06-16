@@ -110,7 +110,7 @@ export const useWorkflowStore = defineStore('workflow', {
       return name;
     },
 
-    async createStep(name: string, transitions: number[] = [], color = '#333333'): Promise<Step | null> {
+    async createStep(name: string, transitions: number[] = [], color = '#ffffff'): Promise<Step | null> {
       this.isMutating = true;
       this.error = null;
       try {
