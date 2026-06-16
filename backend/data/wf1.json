@@ -228,5 +228,45 @@
 			12
 		],
 		"color": "#2cce5c"
+	},
+	{
+		"initialIndex": 33,
+		"name": "Шаг 29",
+		"x": -3,
+		"y": 336,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 34,
+		"name": "Шаг 30",
+		"x": 24,
+		"y": 256,
+		"nextSteps": [],
+		"color": "#ad1414"
+	},
+	{
+		"initialIndex": 35,
+		"name": "Шаг 31",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 36,
+		"name": "Шаг 32",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ba1c1c"
+	},
+	{
+		"initialIndex": 37,
+		"name": "Шаг 33",
+		"x": 505,
+		"y": 172,
+		"nextSteps": [],
+		"color": "#ffffff"
 	}
 ]

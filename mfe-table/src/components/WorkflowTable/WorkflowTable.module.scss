@@ -27,8 +27,8 @@
   display: inline-flex;
   align-items: center;
   gap: $spacing-sm;
-  background: $color-surface;
-  border: 1px solid $color-border;
+  background: #ECECEC;
+  border: none;
   border-radius: $border-radius;
   padding: $spacing-sm $spacing-md;
   font-family: inherit;
@@ -38,7 +38,7 @@
   transition: background 0.15s ease;
 
   &:hover {
-    background: $color-row-hover;
+    background: darken(#ECECEC, 5%);
   }
 
   &:disabled {
@@ -92,7 +92,6 @@
   min-height: 0;
   overflow: auto;
   background: $color-surface;
-  border: 1px solid $color-border;
   border-radius: $border-radius;
 }
 
@@ -200,16 +199,16 @@
 
 .workflow__deleteBtn {
   border: none;
-  background: transparent;
+  background: #ECECEC;
   color: $color-text-muted;
   cursor: pointer;
   font-size: 14px;
-  padding: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius;
 
   &:hover {
     color: $color-danger;
-    background: $color-row-hover;
+    background: darken(#ECECEC, 6%);
   }
 }
 
