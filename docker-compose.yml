@@ -4,8 +4,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
-    volumes:
-      - wf_data:/app/data
     networks:
       - wf-net
 
@@ -28,5 +26,3 @@ networks:
       # MTU ниже 1376 (Amnezia VPN) чтобы избежать фрагментации пакетов
       com.docker.network.driver.mtu: "1350"
 
-volumes:
-  wf_data:
