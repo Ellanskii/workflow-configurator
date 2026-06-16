@@ -49,14 +49,15 @@ body {
   display: flex;
   min-width: 0;
   height: 100%;
+  padding: 16px;
+  gap: 16px;
 }
 
 .app__table {
-  flex: 0 0 38%;
+  flex: 1;
   min-width: 0;
   height: 100%;
   overflow: hidden;
-  border-right: 1px solid #e2e2e6;
 }
 
 .single-spa-container {
