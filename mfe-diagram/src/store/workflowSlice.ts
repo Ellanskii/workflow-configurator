@@ -44,6 +44,14 @@ const workflowSlice = createSlice({
         step.y = action.payload.y;
       }
     },
+    stepDeleted(state, action: PayloadAction<number>) {
+      state.steps = state.steps
+        .filter((s) => s.id !== action.payload)
+        .map((s) => ({ ...s, transitions: s.transitions.filter((t) => t !== action.payload) }));
+      if (state.selectedStepId === action.payload) {
+        state.selectedStepId = null;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -67,5 +75,5 @@ const workflowSlice = createSlice({
   },
 });
 
-export const { stepSelected, stepMoved } = workflowSlice.actions;
+export const { stepSelected, stepMoved, stepDeleted } = workflowSlice.actions;
 export default workflowSlice.reducer;

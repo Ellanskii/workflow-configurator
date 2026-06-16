@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 
-import { onStepSelected } from '../../events';
+import { onStepMoved, onStepSelected } from '../../events';
 import { useWorkflowStore } from '../../stores/workflow';
 import type { SortColumn, Step } from '../../types';
 import styles from './WorkflowTable.module.scss';
@@ -18,17 +18,20 @@ const pendingDeleteId = ref<number | null>(null);
 const newStepRowRef = ref<HTMLTableRowElement | null>(null);
 let lastCreatedId: number | null = null;
 
-let unsubscribe: (() => void) | null = null;
+const unsubscribers: (() => void)[] = [];
 
 onMounted(async () => {
   await store.fetchWorkflow();
-  unsubscribe = onStepSelected((id) => {
+  unsubscribers.push(onStepSelected((id) => {
     store.setSelectedFromEvent(id);
-  });
+  }));
+  unsubscribers.push(onStepMoved((id, x, y) => {
+    store.moveStepFromEvent(id, x, y);
+  }));
 });
 
 onUnmounted(() => {
-  unsubscribe?.();
+  unsubscribers.forEach((fn) => fn());
 });
 
 const columns: { key: SortColumn; label: string }[] = [

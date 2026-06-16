@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { emitStepSelected, onStepSelected } from '../../events';
+import { emitStepMoved, emitStepSelected, onStepDeleted, onStepSelected } from '../../events';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchWorkflow, moveStep, stepMoved, stepSelected } from '../../store/workflowSlice';
+import { fetchWorkflow, moveStep, stepDeleted, stepMoved, stepSelected } from '../../store/workflowSlice';
 import type { Step } from '../../types';
 import styles from './WorkflowDiagram.module.scss';
 
@@ -35,10 +35,15 @@ export function WorkflowDiagram() {
 
   useEffect(() => {
     dispatch(fetchWorkflow());
-    const unsubscribe = onStepSelected((id) => {
-      dispatch(stepSelected(id));
-    });
-    return unsubscribe;
+    const unsubs = [
+      onStepSelected((id) => {
+        dispatch(stepSelected(id));
+      }),
+      onStepDeleted((id) => {
+        dispatch(stepDeleted(id));
+      }),
+    ];
+    return () => unsubs.forEach((fn) => fn());
   }, [dispatch]);
 
   const handleBlockClick = useCallback(
@@ -85,7 +90,9 @@ export function WorkflowDiagram() {
       dragRef.current = null;
       const step = steps.find((s) => s.id === drag.id);
       if (step) {
-        dispatch(moveStep({ id: step.id, x: step.x, y: step.y }));
+        dispatch(moveStep({ id: step.id, x: step.x, y: step.y })).then(() => {
+          emitStepMoved(step.id, step.x, step.y);
+        });
       }
     };
 

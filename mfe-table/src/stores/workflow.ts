@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 import * as api from '../api/workflow';
-import { emitStepSelected } from '../events';
+import { emitStepDeleted, emitStepSelected } from '../events';
 import type { SortColumn, SortDirection, Step } from '../types';
 
 const SORT_STORAGE_KEY = 'workflow_sort';
@@ -140,6 +140,7 @@ export const useWorkflowStore = defineStore('workflow', {
         if (this.selectedStepId === id) {
           this.selectStep(null);
         }
+        emitStepDeleted(id);
       } catch {
         this.error = 'Не удалось удалить шаг';
       } finally {
@@ -177,6 +178,14 @@ export const useWorkflowStore = defineStore('workflow', {
         await api.changeStepXY(id, x, y);
       } catch {
         this.error = 'Не удалось сохранить координаты шага';
+      }
+    },
+
+    moveStepFromEvent(id: number, x: number, y: number) {
+      const step = this.steps.find((s) => s.id === id);
+      if (step) {
+        step.x = x;
+        step.y = y;
       }
     },
 
