@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - wf_data:/app/data
+    networks:
+      - wf-net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - wf-net
+
+networks:
+  wf-net:
+    driver: bridge
+    driver_opts:
+      # MTU ниже 1376 (Amnezia VPN) чтобы избежать фрагментации пакетов
+      com.docker.network.driver.mtu: "1350"
+
+volumes:
+  wf_data:

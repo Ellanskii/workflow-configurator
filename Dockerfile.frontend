@@ -1,0 +1,31 @@
+FROM node:24-alpine AS root-build
+WORKDIR /app
+COPY root-config/package*.json ./
+RUN npm ci
+COPY root-config/ .
+ARG VITE_MFE_TABLE_URL=/mfe-table.js
+ARG VITE_MFE_DIAGRAM_URL=/mfe-diagram.js
+RUN npm run build
+
+FROM node:24-alpine AS table-build
+WORKDIR /app
+COPY mfe-table/package*.json ./
+RUN npm ci
+COPY mfe-table/ .
+ARG VITE_API_URL=
+RUN npm run build
+
+FROM node:24-alpine AS diagram-build
+WORKDIR /app
+COPY mfe-diagram/package*.json ./
+RUN npm ci
+COPY mfe-diagram/ .
+ARG VITE_API_URL=
+RUN npm run build
+
+FROM nginx:1.27-alpine
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=root-build /app/dist /usr/share/nginx/html
+COPY --from=table-build /app/dist/mfe-table.js /usr/share/nginx/html/mfe-table.js
+COPY --from=diagram-build /app/dist/mfe-diagram.js /usr/share/nginx/html/mfe-diagram.js
+EXPOSE 80
