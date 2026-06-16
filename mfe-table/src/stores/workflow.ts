@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 import * as api from '../api/workflow';
-import { emitStepDeleted, emitStepSelected } from '../events';
+import { emitStepCreated, emitStepDeleted, emitStepSelected } from '../events';
 import type { SortColumn, SortDirection, Step } from '../types';
 
 const SORT_STORAGE_KEY = 'workflow_sort';
@@ -117,6 +117,7 @@ export const useWorkflowStore = defineStore('workflow', {
         const name = this.generateDefaultName();
         const step = await api.createStep(name, 0, 0, '#333333');
         this.steps.push(step);
+        emitStepCreated(step);
         return step;
       } catch {
         this.error = 'Не удалось создать шаг';

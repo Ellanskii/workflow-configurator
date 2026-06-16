@@ -52,6 +52,9 @@ const workflowSlice = createSlice({
         state.selectedStepId = null;
       }
     },
+    stepCreated(state, action: PayloadAction<Step>) {
+      state.steps.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,5 +78,5 @@ const workflowSlice = createSlice({
   },
 });
 
-export const { stepSelected, stepMoved, stepDeleted } = workflowSlice.actions;
+export const { stepSelected, stepMoved, stepDeleted, stepCreated } = workflowSlice.actions;
 export default workflowSlice.reducer;
