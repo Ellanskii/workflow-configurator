@@ -1,0 +1,89 @@
+@import '../../assets/styles/variables';
+
+.diagram {
+  font-family: $font-family;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.diagram__toolbar {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  padding: $spacing-xs $spacing-sm;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.diagram__zoomBtn {
+  border: 1px solid $color-border;
+  background: $color-surface;
+  border-radius: $border-radius;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 12px;
+  color: $color-text;
+
+  &:hover {
+    background: $color-bg;
+  }
+}
+
+.diagram__zoomValue {
+  font-size: 12px;
+  color: $color-text-muted;
+  min-width: 40px;
+  text-align: center;
+}
+
+.diagram__viewport {
+  flex: 1;
+  overflow: auto;
+  background: $color-bg;
+}
+
+.diagram__canvas {
+  position: relative;
+  transform-origin: 0 0;
+}
+
+.diagram__arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.diagram__block {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: $color-surface;
+  border: 2px solid;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+  padding: $spacing-xs $spacing-sm;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: grab;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.diagram__block--selected {
+  border-style: dashed;
+}

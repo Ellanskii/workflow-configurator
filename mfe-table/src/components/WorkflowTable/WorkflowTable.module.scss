@@ -1,0 +1,263 @@
+@import '../../assets/styles/variables';
+
+.workflow {
+  font-family: $font-family;
+  color: $color-text;
+  padding: $spacing-lg;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.workflow__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.workflow__createBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  padding: $spacing-sm $spacing-md;
+  font-family: inherit;
+  font-size: 14px;
+  color: $color-link;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: $color-row-hover;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.workflow__search {
+  position: relative;
+  margin-bottom: $spacing-md;
+  max-width: 320px;
+}
+
+.workflow__searchIcon {
+  position: absolute;
+  left: $spacing-sm;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-text-muted;
+  font-size: 13px;
+}
+
+.workflow__searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  padding: $spacing-sm $spacing-sm $spacing-sm 32px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  background: $color-surface;
+
+  &:focus {
+    outline: 2px solid $color-link;
+    outline-offset: -1px;
+  }
+}
+
+.workflow__toast {
+  background: #fdecea;
+  color: $color-danger;
+  border: 1px solid #f5c6cb;
+  border-radius: $border-radius;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-md;
+  font-size: 13px;
+}
+
+.workflow__tableWrap {
+  flex: 1;
+  overflow: auto;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+}
+
+.workflow__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.workflow__thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: $color-header-bg;
+}
+
+.workflow__th {
+  text-align: left;
+  padding: $spacing-sm $spacing-md;
+  font-weight: 600;
+  color: $color-text-muted;
+  border-bottom: 1px solid $color-border;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.workflow__th--actions {
+  cursor: default;
+  width: 40px;
+}
+
+.workflow__sortIndicator {
+  display: inline-block;
+  width: 10px;
+  font-size: 10px;
+}
+
+.workflow__tbody--loading {
+  opacity: 0.5;
+}
+
+.workflow__row {
+  cursor: pointer;
+  transition: background 0.1s ease;
+
+  &:hover {
+    background: $color-row-hover;
+  }
+
+  &.workflow__row--selected {
+    background: $color-row-selected;
+
+    &:hover {
+      background: $color-row-selected;
+    }
+  }
+}
+
+.workflow__row--selected {
+  background: $color-row-selected;
+}
+
+.workflow__td {
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $color-border;
+  vertical-align: middle;
+}
+
+.workflow__td--actions {
+  width: 40px;
+  text-align: center;
+}
+
+.workflow__fileIcon {
+  color: $color-text-muted;
+  margin-right: $spacing-sm;
+}
+
+.workflow__name {
+  vertical-align: middle;
+}
+
+.workflow__noTransitions {
+  color: $color-text-muted;
+}
+
+.workflow__editInput {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 2px 6px;
+  border: 1px solid $color-link;
+  border-radius: $border-radius;
+  width: 70%;
+}
+
+.workflow__editError {
+  color: $color-danger;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.workflow__deleteBtn {
+  border: none;
+  background: transparent;
+  color: $color-text-muted;
+  cursor: pointer;
+  font-size: 14px;
+  padding: $spacing-xs;
+  border-radius: $border-radius;
+
+  &:hover {
+    color: $color-danger;
+    background: $color-row-hover;
+  }
+}
+
+.workflow__empty {
+  text-align: center;
+  padding: $spacing-lg;
+  color: $color-text-muted;
+}
+
+.workflow__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.workflow__dialog {
+  background: $color-surface;
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  min-width: 280px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.workflow__dialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.workflow__dialogCancel,
+.workflow__dialogConfirm {
+  font-family: inherit;
+  font-size: 13px;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius;
+  cursor: pointer;
+  border: 1px solid $color-border;
+  background: $color-surface;
+}
+
+.workflow__dialogConfirm {
+  background: $color-danger;
+  color: #fff;
+  border-color: $color-danger;
+}
