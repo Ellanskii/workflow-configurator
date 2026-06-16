@@ -26,17 +26,17 @@ describe('workflow store', () => {
     localStorage.clear();
   });
 
-  it('createStep generates unique default name', async () => {
+  it('createStep uses provided name and transitions', async () => {
     const store = useWorkflowStore();
     store.steps = [makeStep({ id: 0, name: 'Шаг 1' })];
 
     vi.mocked(api.createStep).mockResolvedValue(
-      makeStep({ id: 1, name: 'Шаг 2' }),
+      makeStep({ id: 1, name: 'Шаг 2', transitions: [0] }),
     );
 
-    const step = await store.createStep();
+    const step = await store.createStep('Шаг 2', [0]);
 
-    expect(api.createStep).toHaveBeenCalledWith('Шаг 2', 0, 0, '#ffffff');
+    expect(api.createStep).toHaveBeenCalledWith('Шаг 2', 0, 0, '#333333', [0]);
     expect(step?.name).toBe('Шаг 2');
     expect(store.steps).toHaveLength(2);
   });

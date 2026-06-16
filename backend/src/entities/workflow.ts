@@ -15,11 +15,12 @@ export class Workflow {
     x: number,
     y: number,
     color?: string,
+    nextSteps?: number[],
   ): WorkflowStep {
     const indices = this.steps.map((s) => s.initialIndex);
     const initialIndex =
       indices.length === 0 ? 0 : Math.max(...indices) + 1;
-    const step = new WorkflowStep(initialIndex, stepName, x, y, [], color);
+    const step = new WorkflowStep(initialIndex, stepName, x, y, nextSteps ?? [], color);
     this.steps.push(step);
     return step;
   }

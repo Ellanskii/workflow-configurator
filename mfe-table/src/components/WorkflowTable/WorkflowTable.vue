@@ -18,6 +18,12 @@ const pendingDeleteId = ref<number | null>(null);
 const newStepRowRef = ref<HTMLTableRowElement | null>(null);
 let lastCreatedId: number | null = null;
 
+const showCreateModal = ref(false);
+const createName = ref('');
+const createTransitions = ref<number[]>([]);
+const createError = ref('');
+const createNameInputRef = ref<HTMLInputElement | null>(null);
+
 const unsubscribers: (() => void)[] = [];
 
 onMounted(async () => {
@@ -99,15 +105,40 @@ function cancelEdit() {
 }
 
 async function onCreateClick() {
-  const step = await store.createStep();
+  createName.value = store.generateDefaultName();
+  createTransitions.value = [];
+  createError.value = '';
+  showCreateModal.value = true;
+  await nextTick();
+  createNameInputRef.value?.focus();
+  createNameInputRef.value?.select();
+}
+
+function closeCreateModal() {
+  showCreateModal.value = false;
+}
+
+async function submitCreate() {
+  const name = createName.value.trim();
+  if (!name) {
+    createError.value = 'Название не может быть пустым';
+    return;
+  }
+  if (store.isNameTaken(name)) {
+    createError.value = 'Такое название уже используется';
+    return;
+  }
+  const step = await store.createStep(name, createTransitions.value);
   if (step) {
+    showCreateModal.value = false;
     lastCreatedId = step.id;
     await nextTick();
     await nextTick();
     if (newStepRowRef.value) {
       newStepRowRef.value.scrollIntoView({ block: 'nearest' });
     }
-    await startEdit(step);
+  } else {
+    createError.value = store.error ?? 'Не удалось создать шаг';
   }
 }
 
@@ -245,6 +276,53 @@ function onSearchInput(e: Event) {
           </button>
           <button type="button" :class="styles.workflow__dialogConfirm" @click="confirmDelete">
             Удалить
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showCreateModal" :class="styles.workflow__overlay" @click.self="closeCreateModal">
+      <div :class="[styles.workflow__dialog, styles['workflow__dialog--create']]">
+        <h2 :class="styles.workflow__dialogTitle">Новое состояние</h2>
+
+        <div :class="styles.workflow__formGroup">
+          <label :class="styles.workflow__formLabel">Название</label>
+          <input
+            ref="createNameInputRef"
+            v-model="createName"
+            :class="styles.workflow__formInput"
+            placeholder="Введите название"
+            @keydown.enter="submitCreate"
+            @keydown.escape="closeCreateModal"
+          />
+          <div v-if="createError" :class="styles.workflow__editError">{{ createError }}</div>
+        </div>
+
+        <div v-if="store.steps.length > 0" :class="styles.workflow__formGroup">
+          <label :class="styles.workflow__formLabel">Следующие шаги</label>
+          <div :class="styles.workflow__checkboxList">
+            <label
+              v-for="step in store.steps"
+              :key="step.id"
+              :class="styles.workflow__checkboxItem"
+            >
+              <input type="checkbox" :value="step.id" v-model="createTransitions" />
+              {{ step.name }}
+            </label>
+          </div>
+        </div>
+
+        <div :class="styles.workflow__dialogActions">
+          <button type="button" :class="styles.workflow__dialogCancel" @click="closeCreateModal">
+            Отмена
+          </button>
+          <button
+            type="button"
+            :class="[styles.workflow__dialogConfirm, styles['workflow__dialogConfirm--primary']]"
+            :disabled="store.isMutating"
+            @click="submitCreate"
+          >
+            Создать
           </button>
         </div>
       </div>

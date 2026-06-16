@@ -54,6 +54,7 @@ export async function createStep(
   x: number,
   y: number,
   color?: string,
+  nextSteps?: number[],
 ): Promise<Step> {
   const { data } = await client.post<BackendStep>('/workflow/createStep', {
     wfName: WF_NAME,
@@ -61,6 +62,7 @@ export async function createStep(
     x,
     y,
     color,
+    nextSteps,
   });
   return toStep(data);
 }

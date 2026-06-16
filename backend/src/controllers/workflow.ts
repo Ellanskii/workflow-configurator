@@ -301,9 +301,15 @@ export function createGetDataRouter(repository: WorkflowRepository): Router {
           ? req.body.color.trim()
           : undefined;
 
+      const nextSteps =
+        Array.isArray(req.body?.nextSteps) &&
+        req.body.nextSteps.every((v: unknown) => typeof v === 'number' && Number.isInteger(v))
+          ? (req.body.nextSteps as number[])
+          : undefined;
+
       try {
         const workflow = await repository.get(wfName);
-        const step = workflow.createStep(stepName.trim(), x, y, color);
+        const step = workflow.createStep(stepName.trim(), x, y, color, nextSteps);
         await repository.save(workflow);
         res.status(201).json(step);
       } catch (err) {

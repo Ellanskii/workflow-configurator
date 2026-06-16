@@ -261,3 +261,74 @@
   color: #fff;
   border-color: $color-danger;
 }
+
+.workflow__dialogConfirm--primary {
+  background: $color-link;
+  border-color: $color-link;
+}
+
+.workflow__dialog--create {
+  min-width: 380px;
+  max-width: 480px;
+  width: 100%;
+}
+
+.workflow__dialogTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 $spacing-md 0;
+}
+
+.workflow__formGroup {
+  margin-bottom: $spacing-md;
+}
+
+.workflow__formLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+.workflow__formInput {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  padding: $spacing-sm;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  background: $color-surface;
+
+  &:focus {
+    outline: 2px solid $color-link;
+    outline-offset: -1px;
+  }
+}
+
+.workflow__checkboxList {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  padding: $spacing-xs 0;
+}
+
+.workflow__checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-row-hover;
+  }
+
+  input[type='checkbox'] {
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+}

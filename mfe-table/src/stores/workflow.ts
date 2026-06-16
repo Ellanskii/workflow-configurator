@@ -110,12 +110,11 @@ export const useWorkflowStore = defineStore('workflow', {
       return name;
     },
 
-    async createStep(): Promise<Step | null> {
+    async createStep(name: string, transitions: number[] = []): Promise<Step | null> {
       this.isMutating = true;
       this.error = null;
       try {
-        const name = this.generateDefaultName();
-        const step = await api.createStep(name, 0, 0, '#333333');
+        const step = await api.createStep(name, 0, 0, '#333333', transitions);
         this.steps.push(step);
         emitStepCreated(step);
         return step;
