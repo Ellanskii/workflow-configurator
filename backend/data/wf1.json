@@ -1,0 +1,159 @@
+[
+	{
+		"initialIndex": 4,
+		"name": "Доставка до логистического терминала",
+		"x": 367,
+		"y": 31,
+		"nextSteps": [
+			5
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 5,
+		"name": "Сортировка",
+		"x": 88,
+		"y": 337,
+		"nextSteps": [
+			6
+		],
+		"color": "#666666"
+	},
+	{
+		"initialIndex": 7,
+		"name": "Хранение",
+		"x": 339,
+		"y": 394,
+		"nextSteps": [
+			8,
+			9
+		],
+		"color": "#666666"
+	},
+	{
+		"initialIndex": 8,
+		"name": "Доставка до ПВ",
+		"x": 146,
+		"y": 513,
+		"nextSteps": [
+			10
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 9,
+		"name": "Доставка до адреса получателя",
+		"x": 448,
+		"y": 334,
+		"nextSteps": [
+			11
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 10,
+		"name": "Выдано в ПВ",
+		"x": 144,
+		"y": 615,
+		"nextSteps": [
+			12
+		],
+		"color": "#338000"
+	},
+	{
+		"initialIndex": 11,
+		"name": "Выдано по адресу получателя",
+		"x": 628,
+		"y": 625,
+		"nextSteps": [
+			12
+		],
+		"color": "#338000"
+	},
+	{
+		"initialIndex": 12,
+		"name": "Возврат",
+		"x": 661,
+		"y": 346,
+		"nextSteps": [
+			13
+		],
+		"color": "#a02c2c"
+	},
+	{
+		"initialIndex": 13,
+		"name": "Доставка на сортировочный пункт",
+		"x": 222,
+		"y": 795,
+		"nextSteps": [
+			14
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 14,
+		"name": "Сортировка",
+		"x": 526,
+		"y": 795,
+		"nextSteps": [
+			15
+		],
+		"color": "#666666"
+	},
+	{
+		"initialIndex": 15,
+		"name": "Отправка продавцу",
+		"x": 763,
+		"y": 795,
+		"nextSteps": [],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 16,
+		"name": "Шаг 17",
+		"x": 232,
+		"y": 221,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 17,
+		"name": "Шаг 18",
+		"x": 48,
+		"y": 56,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 18,
+		"name": "Шаг 14",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 19,
+		"name": "Шаг 15",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 20,
+		"name": "Шаг 16",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ffffff"
+	},
+	{
+		"initialIndex": 21,
+		"name": "Шаг 19",
+		"x": 0,
+		"y": 0,
+		"nextSteps": [],
+		"color": "#ffffff"
+	}
+]
