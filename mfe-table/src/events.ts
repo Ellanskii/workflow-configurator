@@ -2,6 +2,7 @@ export const STEP_SELECTED = 'workflow:step-selected';
 export const STEP_MOVED = 'workflow:step-moved';
 export const STEP_DELETED = 'workflow:step-deleted';
 export const STEP_CREATED = 'workflow:step-created';
+export const STEP_RENAMED = 'workflow:step-renamed';
 
 export function emitStepSelected(stepId: number | null): void {
   window.dispatchEvent(
@@ -62,4 +63,17 @@ export function onStepCreated(cb: (step: StepCreatedPayload) => void): () => voi
     cb((e as CustomEvent<StepCreatedPayload>).detail);
   window.addEventListener(STEP_CREATED, handler);
   return () => window.removeEventListener(STEP_CREATED, handler);
+}
+
+export function emitStepRenamed(id: number, name: string): void {
+  window.dispatchEvent(new CustomEvent(STEP_RENAMED, { detail: { id, name } }));
+}
+
+export function onStepRenamed(cb: (id: number, name: string) => void): () => void {
+  const handler = (e: Event): void => {
+    const { id, name } = (e as CustomEvent<{ id: number; name: string }>).detail;
+    cb(id, name);
+  };
+  window.addEventListener(STEP_RENAMED, handler);
+  return () => window.removeEventListener(STEP_RENAMED, handler);
 }

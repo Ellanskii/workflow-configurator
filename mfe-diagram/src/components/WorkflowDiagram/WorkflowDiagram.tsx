@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { emitStepMoved, emitStepSelected, onStepCreated, onStepDeleted, onStepSelected } from '../../events';
+import { emitStepMoved, emitStepSelected, onStepCreated, onStepDeleted, onStepRenamed, onStepSelected } from '../../events';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchWorkflow, moveStep, stepCreated, stepDeleted, stepMoved, stepSelected } from '../../store/workflowSlice';
+import { fetchWorkflow, moveStep, stepCreated, stepDeleted, stepMoved, stepRenamed, stepSelected } from '../../store/workflowSlice';
 import type { Step } from '../../types';
 import styles from './WorkflowDiagram.module.scss';
 
@@ -44,6 +44,9 @@ export function WorkflowDiagram() {
       }),
       onStepCreated((step) => {
         dispatch(stepCreated(step));
+      }),
+      onStepRenamed((id, name) => {
+        dispatch(stepRenamed({ id, name }));
       }),
     ];
     return () => unsubs.forEach((fn) => fn());

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 import * as api from '../api/workflow';
-import { emitStepCreated, emitStepDeleted, emitStepSelected } from '../events';
+import { emitStepCreated, emitStepDeleted, emitStepRenamed, emitStepSelected } from '../events';
 import type { SortColumn, SortDirection, Step } from '../types';
 
 const SORT_STORAGE_KEY = 'workflow_sort';
@@ -159,6 +159,7 @@ export const useWorkflowStore = defineStore('workflow', {
         await api.changeStepName(id, trimmed);
         const step = this.steps.find((s) => s.id === id);
         if (step) step.name = trimmed;
+        emitStepRenamed(id, trimmed);
         return true;
       } catch {
         this.error = 'Не удалось переименовать шаг';

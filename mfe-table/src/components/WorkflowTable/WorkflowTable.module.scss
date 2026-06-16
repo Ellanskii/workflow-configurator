@@ -38,7 +38,7 @@
   transition: background 0.15s ease;
 
   &:hover {
-    background: darken(#ECECEC, 5%);
+    background: #E0E0E0;
   }
 
   &:disabled {
@@ -208,7 +208,7 @@
 
   &:hover {
     color: $color-danger;
-    background: darken(#ECECEC, 6%);
+    background: #DEDEDE;
   }
 }
 

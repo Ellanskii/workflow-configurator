@@ -55,6 +55,10 @@ const workflowSlice = createSlice({
     stepCreated(state, action: PayloadAction<Step>) {
       state.steps.push(action.payload);
     },
+    stepRenamed(state, action: PayloadAction<{ id: number; name: string }>) {
+      const step = state.steps.find((s) => s.id === action.payload.id);
+      if (step) step.name = action.payload.name;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,5 +82,5 @@ const workflowSlice = createSlice({
   },
 });
 
-export const { stepSelected, stepMoved, stepDeleted, stepCreated } = workflowSlice.actions;
+export const { stepSelected, stepMoved, stepDeleted, stepCreated, stepRenamed } = workflowSlice.actions;
 export default workflowSlice.reducer;
