@@ -1,5 +1,87 @@
 [
 	{
+		"initialIndex": 0,
+		"name": "Закупка",
+		"x": 173,
+		"y": 100,
+		"nextSteps": [
+			2
+		],
+		"color": "#666666"
+	},
+	{
+		"initialIndex": 1,
+		"name": "Движение до ПТО",
+		"x": 583,
+		"y": 136,
+		"nextSteps": [
+			3
+		],
+		"color": "#aa8800"
+	},
+	{
+		"initialIndex": 2,
+		"name": "Отправка продавцом",
+		"x": 500,
+		"y": 52,
+		"nextSteps": [
+			1,
+			4
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 3,
+		"name": "Таможенное оформление",
+		"x": 682,
+		"y": 214,
+		"nextSteps": [
+			4
+		],
+		"color": "#a02c2c"
+	},
+	{
+		"initialIndex": 4,
+		"name": "Доставка до логистического терминала",
+		"x": 258,
+		"y": 235,
+		"nextSteps": [
+			5
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 5,
+		"name": "Сортировка",
+		"x": 147,
+		"y": 325,
+		"nextSteps": [
+			6
+		],
+		"color": "#666666"
+	},
+	{
+		"initialIndex": 6,
+		"name": "Движение до пункта назначения",
+		"x": 595,
+		"y": 313,
+		"nextSteps": [
+			7
+		],
+		"color": "#0044aa"
+	},
+	{
+		"initialIndex": 7,
+		"name": "Хранение",
+		"x": 375,
+		"y": 433,
+		"nextSteps": [
+			8,
+			9
+		],
+		"color": "#666666"
+	},
+	{
 		"initialIndex": 8,
 		"name": "Доставка до ПВ",
 		"x": 146,
@@ -12,8 +94,8 @@
 	{
 		"initialIndex": 9,
 		"name": "Доставка до адреса получателя",
-		"x": 448,
-		"y": 334,
+		"x": 640,
+		"y": 521,
 		"nextSteps": [
 			11
 		],
@@ -52,8 +134,8 @@
 	{
 		"initialIndex": 13,
 		"name": "Доставка на сортировочный пункт",
-		"x": 430,
-		"y": 549,
+		"x": 222,
+		"y": 795,
 		"nextSteps": [
 			14
 		],
@@ -76,197 +158,5 @@
 		"y": 795,
 		"nextSteps": [],
 		"color": "#0044aa"
-	},
-	{
-		"initialIndex": 16,
-		"name": "Шаг 17",
-		"x": 115,
-		"y": 261,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 17,
-		"name": "Шаг 18",
-		"x": 265,
-		"y": 137,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 18,
-		"name": "Шаг 14",
-		"x": 101,
-		"y": 173,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 19,
-		"name": "Шаг 15",
-		"x": 186,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 20,
-		"name": "Шаг 16",
-		"x": -9,
-		"y": 66,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 21,
-		"name": "Шаг 19",
-		"x": 151,
-		"y": 51,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 22,
-		"name": "Шаг 20",
-		"x": 443,
-		"y": 90,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 23,
-		"name": "Шаг 21",
-		"x": 303,
-		"y": 53,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 24,
-		"name": "Шаг 22",
-		"x": 19,
-		"y": 115,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 25,
-		"name": "Шаг 23",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 26,
-		"name": "Шаг 24",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 27,
-		"name": "Шаг 25",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 28,
-		"name": "Шаг 26",
-		"x": 132,
-		"y": 340,
-		"nextSteps": [
-			8,
-			9
-		],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 29,
-		"name": "123",
-		"x": 102,
-		"y": 434,
-		"nextSteps": [
-			8,
-			9,
-			10,
-			11,
-			13
-		],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 30,
-		"name": "ololo",
-		"x": 263,
-		"y": 222,
-		"nextSteps": [],
-		"color": "#ff0000"
-	},
-	{
-		"initialIndex": 31,
-		"name": "Шаг 27",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [
-			8,
-			9,
-			10
-		],
-		"color": "#333333"
-	},
-	{
-		"initialIndex": 32,
-		"name": "Шаг 28",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [
-			11,
-			12
-		],
-		"color": "#2cce5c"
-	},
-	{
-		"initialIndex": 33,
-		"name": "Шаг 29",
-		"x": -3,
-		"y": 336,
-		"nextSteps": [],
-		"color": "#ffffff"
-	},
-	{
-		"initialIndex": 34,
-		"name": "Шаг 30",
-		"x": 24,
-		"y": 256,
-		"nextSteps": [],
-		"color": "#ad1414"
-	},
-	{
-		"initialIndex": 35,
-		"name": "Шаг 31",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#ffffff"
-	},
-	{
-		"initialIndex": 36,
-		"name": "Шаг 32",
-		"x": 0,
-		"y": 0,
-		"nextSteps": [],
-		"color": "#ba1c1c"
-	},
-	{
-		"initialIndex": 37,
-		"name": "Шаг 33",
-		"x": 505,
-		"y": 172,
-		"nextSteps": [],
-		"color": "#ffffff"
 	}
 ]
