@@ -218,10 +218,10 @@ export function WorkflowDiagram() {
                       y1={from.y}
                       x2={tip.x}
                       y2={tip.y}
-                      stroke="#8a8a92"
+                      stroke="#222222"
                       strokeWidth={1.5}
                     />
-                    <polygon points={arrowPoints(from, tip)} fill="#8a8a92" />
+                    <polygon points={arrowPoints(from, tip)} fill="#222222" />
                   </g>
                 );
               }),
